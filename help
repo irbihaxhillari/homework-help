@@ -1,0 +1,30 @@
+struct lnode A[k][l][m];
+
+int store_ele(int h, int i, int j, struct lnode dest) {
+  A[h][i][j] = dest;
+  return sizeof(A);
+}
+
+struct lnode {
+  struct lnode *next;
+  char *str;
+};
+
+store_ele:
+  movslq  %esi, %rsi
+  movslq  %edi, %rdi
+  movslq  %edx, %rax
+  imulq $343, %rdi, %rdi
+  leaq  (%rsi,%rsi,2), %rdx
+  salq  $4, %rdx
+  addq  %rsi, %rdx
+  addq  %rdi, %rdx
+  addq  %rax, %rdx
+  leaq  A(%rip), %rax
+  salq  $4, %rdx
+  addq  %rax, %rdx
+  movl  $268912, %eax
+  movq  %rcx, (%rdx)
+  movq  %r8, 8(%rdx)
+  ret
+  
